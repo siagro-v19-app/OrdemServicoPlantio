@@ -1,0 +1,288 @@
+<mvc:View controllerName="br.com.idxtec.OrdemServicoPlantio.controller.FormAddEdit"
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:t="sap.ui.table"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	displayBlock="false">
+	<Page showHeader="false">
+		<content>
+			<VBox class="sapUiSmallMargin">
+				<f:SimpleForm id="form"
+					editable="true"
+					layout="ResponsiveGridLayout"
+					title="{viewModel>/tituloPagina}"
+					singleContainerFullSize="false">
+					<core:Title/>
+					<Label text="Ordem ID" labelFor="ordemId"/>
+					<Input id="ordermId" editable="false" value="{dataModel>/Id}"/>
+					<Label text="Data" labelFor="data"/>
+					<DatePicker dateValue="{dataModel>/Data}" displayFormat="dd.MM.yyyy" placeholder="dd.mm.aaaa"
+						required="true" change="formChanges"/>
+					<Label text="Romaneio"/>
+					<Input id="romaneio" value="{dataModel>/Romaneio}" change="formChanges"/>
+					<Label text="Aplicacao" labelFor="aplicacao"/>
+					<MaskInput mask = "99" placeholderSymbol = "_" id="aplicacao" value="{dataModel>/Aplicacao}" change="formChanges"/>
+					<Label text="Nº Quadro" labelFor="quadro"/>
+					<Input required="true" selectedKey="{
+							path: 'dataModel>/Quadro',
+							type: 'sap.ui.model.odata.type.Int32'
+						}"
+						textFormatMode="ValueKey"
+						showSuggestion="true"
+						showValueHelp="true"
+						suggest="handleSuggestQuadro"
+						valueHelpRequest="handleSearchQuadro"
+						suggestionItems="{
+							path: '/Quadros',
+							sorter: {
+								path: 'Numero'
+							}
+						}"
+						id="quadro"
+						change="formChanges">
+						<suggestionItems>
+							<core:ListItem key="{Id}" text="{Numero}" additionalText="{Numero}"/>
+						</suggestionItems>
+					</Input>
+					<Label text="Serviço" labelFor="servico"/>
+					<Input required="true" selectedKey="{dataModel>/Servico}"
+						textFormatMode="ValueKey"
+						showSuggestion="true"
+						showValueHelp="true"
+						suggest="handleSuggestServico"
+						valueHelpRequest="handleSearchServico"
+						suggestionItems="{
+							path: '/ServicoPlantios',
+							sorter: {
+								path: 'Descricao'
+							}
+						}"
+						id="servico">
+						<suggestionItems>
+							<core:ListItem key="{Codigo}" text="{Descricao}" additionalText="{Codigo}"/>
+						</suggestionItems>
+					</Input>
+					<Label text="Hora Inicial" labelFor="horaInicial"/>
+					<TimePicker
+						id="horaInicial"
+						value="{
+							path: 'dataModel>/HoraInicial'
+							
+						}"
+						valueFormat="HH:mm"
+						displayFormat="HH:mm"
+						/>
+					<Label text="Hora Final" labelFor="horaFinal"/>
+					<TimePicker
+						id="horaFinal" 
+						value="{
+							path: 'dataModel>/HoraFinal'
+						}"
+						valueFormat="HH:mm"
+						displayFormat="HH:mm"
+						/>
+					
+					<core:Title/>
+					<Label text="Operador" labelFor="operador"/>
+					<Input required="true" selectedKey="{
+							path: 'dataModel>/Operador',
+							type: 'sap.ui.model.odata.type.Int32'
+						}"
+						textFormatMode="ValueKey"
+						showSuggestion="true"
+						showValueHelp="true"
+						suggest="handleSuggestOperador"
+						valueHelpRequest="handleSearchOperador"
+						suggestionItems="{
+							path: '/OperadorPlantios',
+							sorter: {
+								path: 'Nome'
+							}
+						}"
+						id="operador">
+						<suggestionItems>
+							<core:ListItem key="{Id}" text="{Nome}" additionalText="{Id}"/>
+						</suggestionItems>
+					</Input>
+					<Label text="Nº Equipamento" labelFor="equipamento"/>
+					<Input required="true" selectedKey="{
+							path: 'dataModel>/Equipamento',
+							type: 'sap.ui.model.odata.type.Int32'
+						}"
+						textFormatMode="ValueKey"
+						showSuggestion="true"
+						showValueHelp="true"
+						suggest="handleSuggestEquipamento"
+						valueHelpRequest="handleSearchEquipamento"
+						suggestionItems="{
+							path: '/Equipamentoss',
+							sorter: {
+								path: 'Numero'
+							}
+						}"
+						id="equipamento">
+						<suggestionItems>
+							<core:ListItem key="{Id}" text="{Numero}" additionalText="{Descricao}"/>
+						</suggestionItems>
+					</Input>
+					<Label text="Nº Implemento" labelFor="implemento"/>
+					<Input selectedKey="{
+							path: 'dataModel>/Implemento',
+							type: 'sap.ui.model.odata.type.Int32'
+						}"
+						textFormatMode="ValueKey"
+						showSuggestion="true"
+						showValueHelp="true"
+						suggest="handleSuggestImplemento"
+						valueHelpRequest="handleSearchImplemento"
+						suggestionItems="{
+							path: '/Implementos',
+							sorter: {
+								path: 'Numero'
+							}
+						}"
+						id="implemento">
+						<suggestionItems>
+							<core:ListItem key="{Id}" text="{Numero}" additionalText="{Descricao}"/>
+						</suggestionItems>
+					</Input>
+					
+					<Label text="Horimetro Inicial" labelFor="horimetroInicial"/>
+					<Input id="horimetroInicial" value="{
+						path: 'dataModel>/HorimetroInicial',
+						type: 'sap.ui.model.odata.type.Int32'
+					}"
+					/>
+					<Label text="Horimetro Final" labelFor="horimetroFinal"/>
+					<Input id="horimetroFinal" value="{
+						path: 'dataModel>/HorimetroFinal',
+						type: 'sap.ui.model.odata.type.Int32'
+					}"
+					/>
+					
+					<Label text="Observações" labelFor="observacoes"/>
+					<TextArea id="observacoes" value="{dataModel>/Observacoes}" rows="3" cols="25" />
+					
+				</f:SimpleForm> 
+			</VBox>
+			<VBox class="sapUiSmallMargin">
+				<t:Table id="table"
+					rows="{itemsModel>/}"
+					selectionMode="Single"
+					selectionBehavior="Row"
+					enableSelectAll="false"
+					editable="true"
+					class="sapUiSizeCondensed"
+					visibleRowCountMode="Auto"
+					enableBusyIndicator="true"
+					alternateRowColors="true"
+					enableCustomFilter="false">
+					<t:toolbar>
+						<Toolbar>
+							<Title text="Produtos Utilizados"/>
+							<ToolbarSpacer/>
+							<Button id="inserir" icon="sap-icon://add" press="onAddRow"/>
+							<Button id="remover" icon="sap-icon://delete" press="onRemoveRow"/>
+						</Toolbar>
+					</t:toolbar>
+					<t:columns>
+						<t:Column width="30%">
+							<Label text="Produto" required="true" />
+							<t:template>
+								<Input selectedKey="{
+										path: 'itemsModel>Produto', 
+										type: 'sap.ui.model.odata.type.Int32'
+									}"
+									textFormatMode="ValueKey"
+									showSuggestion="true"
+									showValueHelp="true"
+									valueHelpRequest="handleSearchProduto"
+									suggestionItems="{
+										path: '/Produtos',
+										templateShareable: true
+									}"
+									id="produto"
+									>
+									<suggestionItems>
+										<core:ListItem key="{Id}" text="{Descricao}" additionalText="{Codigo}"/>
+									</suggestionItems>
+								</Input>
+							</t:template>
+						</t:Column>
+						<t:Column width="15%">
+							<Label text="Quantidade"/>
+							<t:template>
+								<Input id="quantidade" value="{
+									path: 'itemsModel>Quantidade',
+									type: 'sap.ui.model.odata.type.Single',
+									formatOptions: {
+										decimals: 3,
+										decimalSeparator: ','
+									}
+								}" change="onCalculaTotal"/>
+							</t:template>
+						</t:Column>
+						<t:Column width="15%">
+							<Label text="Und.Med." required="true"/>
+							<t:template>
+								<Input selectedKey="{
+										path: 'itemsModel>Unidade', 
+										type: 'sap.ui.model.odata.type.Int32'
+									}"
+									textFormatMode="ValueKey"
+									showSuggestion="true"
+									showValueHelp="true"
+									valueHelpRequest="handleSearchUnidade"
+									suggestionItems="{
+										path: '/UnidadeMedidas',
+										templateShareable: true
+									}"
+									id="unidade"
+									>
+									<suggestionItems>
+										<core:ListItem key="{Id}" text="{Sigla}" additionalText="{Descricao}"/>
+									</suggestionItems>
+								</Input>
+							</t:template>
+						</t:Column>
+						<t:Column width="20%">
+							<Label text="Valor Unitário"/>
+							<t:template>
+								<Input id="valor" value="{
+									path: 'itemsModel>ValorUnitario',
+									type: 'sap.ui.model.odata.type.Single',
+									formatOptions: {
+										decimals: 2,
+										decimalSeparator: ','
+									}
+								}" change="onCalculaTotal" description="R$"/>
+							</t:template>
+						</t:Column>
+						<t:Column width="20%">
+							<Label text="Total"/>
+							<t:template>
+								<Input id="totalitens" value="{
+									path: 'itemsModel>ValorTotal',
+									type: 'sap.ui.model.odata.type.Single',
+									formatOptions: {
+										decimals: 2,
+										decimalSeparator: ','
+									}
+								}" editable="false" description="R$"/>
+							</t:template>
+						</t:Column>
+					</t:columns>
+				</t:Table>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Salvar" type="Accept" press="onSave"/>
+				<Button text="Cancelar" type="Reject" press="onCancel"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

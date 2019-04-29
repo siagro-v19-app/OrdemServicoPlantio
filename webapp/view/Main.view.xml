@@ -1,0 +1,103 @@
+<mvc:View 
+	controllerName="br.com.idxtec.OrdemServicoPlantio.controller.Main" 
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" 
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table">
+	<App id="app">
+		<pages>
+			<Page showHeader="false" class="sapUiContentPadding" enableScrolling="false">
+				<content>
+					<t:Table id="table"
+						selectionMode="Single"
+						selectionBehavior="Row"
+						class="sapUiSizeCondensed"
+						visibleRowCountMode="Auto"
+						enableBusyIndicator="true"
+						alternateRowColors="true">
+						<t:toolbar>
+							<Toolbar>
+								<Title text="Ordem de Serviço"/>
+								<ToolbarSpacer/>
+								<SearchField placeholder="Pesquisar descrição..." width="30%" search="filtraEquip"/>
+							</Toolbar>
+						</t:toolbar>
+						<t:columns>
+							<t:Column id="columnEmpresa" filtered="true" width="100px" >
+								<Label text="Empresa"/>
+								<t:template>
+									<Text text="{Empresa}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column id="columnId" sortProperty="Id" filterProperty="Id" filterOperator="EQ">
+								<Label text="Ordem Id"/>
+								<t:template>
+									<Text text="{Id}"/> 
+								</t:template>
+							</t:Column>
+							<t:Column id="columnData" sortProperty="Data">
+								<Label text="Data"/>
+								<t:template>
+									<Text text="{
+										path: 'Data',
+										type : 'sap.ui.model.type.Date',
+										formatOptions: {
+											style : 'short'
+										}
+									}"/> 
+								</t:template>
+							</t:Column>
+							<t:Column id="colQuadro" sortProperty="QuadroDetails/Numero" filterProperty="QuadroDetails/Numero">
+								<Label text="Quadro"/>
+								<t:template>
+									<Link text="{QuadroDetails/Numero}"/> 
+								</t:template>
+							</t:Column>
+							<t:Column id="colDesc" sortProperty="QuadroDetails/Descricao" filterProperty="QuadroDetails/Descricao">
+								<Label text="Descrição"/>
+								<t:template>
+									<Text text="{QuadroDetails/Descricao}"/> 
+								</t:template>
+							</t:Column>
+							<t:Column id="colRomaneio" sortProperty="Romaneio" filterProperty="Romaneio">
+								<Label text="Romaneio"/>
+								<t:template>
+									<Text text="{Romaneio}"/> 
+								</t:template>
+							</t:Column>
+							<t:Column id="colAplic" sortProperty="Aplicacao" filterProperty="Aplicacao">
+								<Label text="Aplicação"/>
+								<t:template>
+									<Text text="{Aplicacao}"/> 
+								</t:template>
+							</t:Column>
+							<t:Column id="colEquip" sortProperty="EquipamentosDetails/Numero" filterProperty="EquipamentosDetails/Numero">
+								<Label text="Equipamento"/>
+								<t:template>
+									<Text text="{EquipamentosDetails/Numero}"/> 
+								</t:template>
+							</t:Column>
+							<t:Column id="colServico" sortProperty="ServicoPlantioDetails/Descricao" filterProperty="ServicoPlantioDetails/Descricao">
+								<Label text="Serviço"/>
+								<t:template>
+									<Text text="{ServicoPlantioDetails/Descricao}"/> 
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button id="incluir" text="Incluir novo" press="onAdd" type="Emphasized"/>
+						<Button id="editar" text="Editar" press="onEdit"/>
+						<Button id="remover" text="Remover" press="onRemove"/>
+						<ToolbarSeparator/>
+						<Button icon="sap-icon://refresh" press="onRefresh"/>
+					</Toolbar>
+				</footer>
+			</Page>	
+		</pages>
+	</App>
+</mvc:View>
