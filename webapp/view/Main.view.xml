@@ -20,7 +20,7 @@
 							<Toolbar>
 								<Title text="Ordem de Serviço"/>
 								<ToolbarSpacer/>
-								<SearchField placeholder="Pesquisar descrição..." width="30%" search="filtraEquip"/>
+								<SearchField placeholder="Pesquisar descrição..." width="30%" search="filtraOrdem"/>
 							</Toolbar>
 						</t:toolbar>
 						<t:columns>

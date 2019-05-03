@@ -1,17 +1,60 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
-	<SelectDialog
+	<TableSelectDialog
 		title="Quadro"
 		class="sapUiPopupWithPadding sapUiSizeCompact"
-		items="{path: '/Quadros', sorter: {path: 'Descricao'}}"
+		items="{path: '/Quadros', sorter: {path: 'Descricao'}, parameters: {expand: 'ProdutoDetails,SafraDetails,UnidadeMedidaDetails'}}"
 		search="_handleValueHelpSearch"
 		confirm="_handleValueHelpClose"
 		cancel="_handleValueHelpClose">
-		<StandardListItem
-			iconDensityAware="false"
-			iconInset="false"
-			title="{Descricao}"
-			description="{Id}"/>
-	</SelectDialog>
+		<ColumnListItem>
+			<cells>
+				<ObjectNumber
+					number="{Id}"/>
+				<ObjectIdentifier
+					title="{Numero}"/>
+				<ObjectIdentifier
+					title="{Descricao}"/>
+				<ObjectIdentifier
+					title="{ProdutoDetails/Descricao}"/>
+				<ObjectIdentifier
+					title="{SafraDetails/Descricao}"/>
+				<ObjectIdentifier
+					title="{UnidadeMedidaDetails/Descricao}"/>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="6em">
+				<header>
+					<Text text="ID"/>
+				</header>
+			</Column>
+			<Column width="6em">
+				<header>
+					<Text text="Número"/>
+				</header>
+			</Column>
+			<Column width="12em">
+				<header>
+					<Text text="Descrição"/>
+				</header>
+			</Column>
+			<Column width="12em">
+				<header>
+					<Text text="Produto"/>
+				</header>
+			</Column>
+			<Column width="12em">
+				<header>
+					<Text text="Safra"/>
+				</header>
+			</Column>
+			<Column width="10em">
+				<header>
+					<Text text="Unidade de Medida"/>
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
 </core:FragmentDefinition>
